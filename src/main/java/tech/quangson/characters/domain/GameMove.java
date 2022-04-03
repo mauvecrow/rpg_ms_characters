@@ -6,6 +6,7 @@ public class GameMove {
     private final String moveName;
     private final String category;
     private final String type;
+    private final int basePower;
     private final int cost;
     private final int limit;
     private final int priority;
@@ -16,6 +17,7 @@ public class GameMove {
         moveName = builder.moveName;
         category = builder.category;
         type = builder.type;
+        basePower = builder.basePower;
         cost = builder.cost;
         limit = builder.limit;
         priority = builder.priority;
@@ -34,6 +36,8 @@ public class GameMove {
     public String getType() {
         return type;
     }
+
+    public int getBasePower() { return basePower; }
 
     public int getCost() {
         return cost;
@@ -60,6 +64,7 @@ public class GameMove {
         private final String moveName;
         private String category;
         private String type;
+        private int basePower;
         private int cost;
         private int limit;
         private int priority;
@@ -77,6 +82,11 @@ public class GameMove {
 
         public MoveBuilder type(String type){
             this.type = type;
+            return this;
+        }
+
+        public MoveBuilder basePower(int basePower){
+            this.basePower = basePower;
             return this;
         }
 
@@ -112,7 +122,8 @@ public class GameMove {
         }
 
         private boolean validate(){
-            return category != null && type != null && cost >= 0 && limit > 0 && priority > 0;
+            return category != null && type != null && basePower >= 0
+                    && cost >= 0 && limit > 0 && priority > 0;
         }
     }
 }
