@@ -126,4 +126,53 @@ public class GameMove {
                     && cost >= 0 && limit > 0 && priority > 0;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameMove)) return false;
+
+        GameMove gameMove = (GameMove) o;
+
+        if (getBasePower() != gameMove.getBasePower()) return false;
+        if (getCost() != gameMove.getCost()) return false;
+        if (getLimit() != gameMove.getLimit()) return false;
+        if (getPriority() != gameMove.getPriority()) return false;
+        if (getMoveName() != null ? !getMoveName().equals(gameMove.getMoveName()) : gameMove.getMoveName() != null)
+            return false;
+        if (getCategory() != null ? !getCategory().equals(gameMove.getCategory()) : gameMove.getCategory() != null)
+            return false;
+        if (getType() != null ? !getType().equals(gameMove.getType()) : gameMove.getType() != null) return false;
+        if (getBuffs() != null ? !getBuffs().equals(gameMove.getBuffs()) : gameMove.getBuffs() != null) return false;
+        return getDebuffs() != null ? getDebuffs().equals(gameMove.getDebuffs()) : gameMove.getDebuffs() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getMoveName() != null ? getMoveName().hashCode() : 0;
+        result = 31 * result + (getCategory() != null ? getCategory().hashCode() : 0);
+        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
+        result = 31 * result + getBasePower();
+        result = 31 * result + getCost();
+        result = 31 * result + getLimit();
+        result = 31 * result + getPriority();
+        result = 31 * result + (getBuffs() != null ? getBuffs().hashCode() : 0);
+        result = 31 * result + (getDebuffs() != null ? getDebuffs().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "GameMove{" +
+                "moveName='" + moveName + '\'' +
+                ", category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                ", basePower=" + basePower +
+                ", cost=" + cost +
+                ", limit=" + limit +
+                ", priority=" + priority +
+                ", buffs=" + buffs +
+                ", debuffs=" + debuffs +
+                '}';
+    }
 }
