@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="rpg_character_moveset")
-public class RpgCharacterMovesetEntity {
+public class RpgCharacterMovesetEntity extends AbstractEntity{
 
     @Id
     @Column(name = "moveset_id")
@@ -13,8 +13,6 @@ public class RpgCharacterMovesetEntity {
     @Column(name = "character_id")
     private int characterId;
 
-//    @Column(name = "finite_move_id")
-//    private int moveId;
     @OneToOne
     @JoinColumn(name = "finite_move_id", referencedColumnName = "finite_move_id")
     private RpgMoveEntity rpgMove;
@@ -24,6 +22,8 @@ public class RpgCharacterMovesetEntity {
 
     @Column(name = "is_unlockable")
     private Character isUnlockable;
+
+    //getters and setters
 
     public int getMovesetId() {
         return movesetId;
@@ -40,15 +40,6 @@ public class RpgCharacterMovesetEntity {
     public void setCharacterId(int characterId) {
         this.characterId = characterId;
     }
-
-//    public int getMoveId() {
-//        return moveId;
-//    }
-//
-//    public void setMoveId(int moveId) {
-//        this.moveId = moveId;
-//    }
-
 
     public RpgMoveEntity getRpgMove() {
         return rpgMove;
@@ -74,6 +65,8 @@ public class RpgCharacterMovesetEntity {
         this.isUnlockable = isUnlockable;
     }
 
+    // overrides
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,5 +80,26 @@ public class RpgCharacterMovesetEntity {
     @Override
     public int hashCode() {
         return getMovesetId();
+    }
+
+    @Override
+    public String toString() {
+        return "RpgCharacterMovesetEntity{" +
+                "movesetId=" + movesetId +
+                ", characterId=" + characterId +
+                ", rpgMove=" + rpgMove +
+                ", isDefault=" + isDefault +
+                ", isUnlockable=" + isUnlockable +
+                '}';
+    }
+
+    @Override
+    public int getPrimaryKey() {
+        return getMovesetId();
+    }
+
+    @Override
+    public void setPrimaryKey(int key) {
+        setMovesetId(key);
     }
 }

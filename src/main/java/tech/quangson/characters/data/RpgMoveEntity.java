@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "rpg_finite_moves")
-public final class RpgMoveEntity {
+public final class RpgMoveEntity extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -231,5 +231,37 @@ public final class RpgMoveEntity {
     @Override
     public int hashCode() {
         return moveId;
+    }
+
+    @Override
+    public String toString() {
+        return "RpgMoveEntity{" +
+                "moveId=" + moveId +
+                ", moveName='" + moveName + '\'' +
+                ", moveCategory=" + moveCategory +
+                ", moveType=" + moveType +
+                ", basePower=" + basePower +
+                ", moveLimit=" + moveLimit +
+                ", cost=" + cost +
+                ", priority=" + priority +
+                ", buffStat1=" + buffStat1 +
+                ", buffAmount1=" + buffAmount1 +
+                ", buffStat2=" + buffStat2 +
+                ", buffAmount2=" + buffAmount2 +
+                ", debuffStat1=" + debuffStat1 +
+                ", debuffAmount1=" + debuffAmount1 +
+                ", debuffStat2=" + debuffStat2 +
+                ", debuffAmount2=" + debuffAmount2 +
+                '}';
+    }
+
+    @Override
+    public int getPrimaryKey() {
+        return getMoveId();
+    }
+
+    @Override
+    public void setPrimaryKey(int key) {
+        setMoveId(key);
     }
 }

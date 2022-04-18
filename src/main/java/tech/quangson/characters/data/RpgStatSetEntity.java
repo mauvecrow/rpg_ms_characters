@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "rpg_stat_sets")
-public final class RpgStatSetEntity {
+public final class RpgStatSetEntity extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,5 +121,31 @@ public final class RpgStatSetEntity {
         int result = getStatSetsId();
         result = 31 * result + getCharacterId();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "RpgStatSetEntity{" +
+                "statSetsId=" + statSetsId +
+                ", characterId=" + characterId +
+                ", force=" + force +
+                ", reflex=" + reflex +
+                ", focus=" + focus +
+                ", spirit=" + spirit +
+                ", agility=" + agility +
+                ", evasion=" + evasion +
+                ", energy=" + energy +
+                ", health=" + health +
+                '}';
+    }
+
+    @Override
+    public int getPrimaryKey() {
+        return getStatSetsId();
+    }
+
+    @Override
+    public void setPrimaryKey(int key) {
+        setStatSetsId(key);
     }
 }

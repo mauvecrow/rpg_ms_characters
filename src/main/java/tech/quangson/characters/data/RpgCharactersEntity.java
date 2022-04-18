@@ -2,10 +2,11 @@ package tech.quangson.characters.data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "rpg_characters", schema = "jakarta")
-public final class RpgCharactersEntity {
+public final class RpgCharactersEntity extends AbstractEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "character_id")
@@ -120,5 +121,30 @@ public final class RpgCharactersEntity {
     @Override
     public int hashCode() {
         return getCharacterId();
+    }
+
+    @Override
+    public String toString() {
+        return "RpgCharactersEntity{" +
+                "characterId=" + characterId +
+                ", name='" + name + '\'' +
+                ", clazz='" + clazz + '\'' +
+                ", avatar=" + Arrays.toString(avatar) +
+                ", profile=" + Arrays.toString(profile) +
+                ", creationDate=" + creationDate +
+                ", createdBy='" + createdBy + '\'' +
+                ", lastUpdateDate=" + lastUpdateDate +
+                ", lastUpdatedBy='" + lastUpdatedBy + '\'' +
+                '}';
+    }
+
+    @Override
+    public int getPrimaryKey() {
+        return getCharacterId();
+    }
+
+    @Override
+    public void setPrimaryKey(int key) {
+        setCharacterId(key);
     }
 }
