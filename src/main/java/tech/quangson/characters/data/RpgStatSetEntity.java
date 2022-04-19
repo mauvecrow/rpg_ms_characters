@@ -140,12 +140,12 @@ public final class RpgStatSetEntity extends AbstractEntity{
     }
 
     @Override
-    public int getPrimaryKey() {
+    public int pullPrimaryKey() {
         return getStatSetsId();
     }
 
     @Override
-    public void setPrimaryKey(int key) {
+    public void pushPrimaryKey(int key) {
         setStatSetsId(key);
     }
 }

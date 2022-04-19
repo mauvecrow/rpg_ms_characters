@@ -139,12 +139,12 @@ public final class RpgCharactersEntity extends AbstractEntity{
     }
 
     @Override
-    public int getPrimaryKey() {
+    public int pullPrimaryKey() {
         return getCharacterId();
     }
 
     @Override
-    public void setPrimaryKey(int key) {
+    public void pushPrimaryKey(int key) {
         setCharacterId(key);
     }
 }

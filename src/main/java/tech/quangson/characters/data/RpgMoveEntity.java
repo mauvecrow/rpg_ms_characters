@@ -255,13 +255,14 @@ public final class RpgMoveEntity extends AbstractEntity{
                 '}';
     }
 
+    @Transient
     @Override
-    public int getPrimaryKey() {
+    public int pullPrimaryKey() {
         return getMoveId();
     }
 
     @Override
-    public void setPrimaryKey(int key) {
+    public void pushPrimaryKey(int key) {
         setMoveId(key);
     }
 }

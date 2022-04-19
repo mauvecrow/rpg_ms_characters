@@ -53,7 +53,7 @@ public class AdminCrudImpl<T extends AbstractEntity> implements AdminCrud<T>{
 
     @Override
     public T updateEntityId(T newEntity, T oldEntity) {
-        newEntity.setPrimaryKey(oldEntity.getPrimaryKey());
+        newEntity.pushPrimaryKey(oldEntity.pullPrimaryKey());
         return newEntity;
     }
 }

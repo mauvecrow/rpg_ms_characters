@@ -94,12 +94,12 @@ public class RpgCharacterMovesetEntity extends AbstractEntity{
     }
 
     @Override
-    public int getPrimaryKey() {
+    public int pullPrimaryKey() {
         return getMovesetId();
     }
 
     @Override
-    public void setPrimaryKey(int key) {
+    public void pushPrimaryKey(int key) {
         setMovesetId(key);
     }
 }
