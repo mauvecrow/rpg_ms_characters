@@ -16,17 +16,22 @@ public class AdminMovesetController extends AdminAbstractController<RpgCharacter
     }
 
 
-    @GetMapping()
+    @GetMapping
     public List<RpgCharacterMovesetEntity> getAllMovesets(){
         return getAllEntities();
     }
 
+    @PutMapping
+    public ResponseEntity<?> saveAll(@RequestBody List<RpgCharacterMovesetEntity> movesets){
+        return updateAll(movesets);
+    }
+
     @GetMapping("/{movesetId}")
-    public ResponseEntity<?> getMove(@PathVariable int movesetId){
+    public ResponseEntity<?> getMoveset(@PathVariable int movesetId){
         return getEntity(movesetId);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<?> createMoveset(@RequestBody RpgCharacterMovesetEntity newMoveset){
         return createEntity(newMoveset);
     }
