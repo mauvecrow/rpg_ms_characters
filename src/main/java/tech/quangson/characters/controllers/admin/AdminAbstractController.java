@@ -18,12 +18,12 @@ public abstract class AdminAbstractController<T>{
     }
 
     public ResponseEntity<?> createEntity(T newEntity){
-        var result = adminCrud.create(newEntity);
-        if(result != null){
+        try {
+            var result = adminCrud.create(newEntity);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        else{
-            return new ResponseEntity<>("There was an issue creating a new entity", HttpStatus.BAD_REQUEST);
+        catch(Exception e){
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -33,7 +33,7 @@ public abstract class AdminAbstractController<T>{
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         else {
-            return new ResponseEntity<>("No entity found with id: " + entityId, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageResponse("No entity found with id: " + entityId), HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -48,9 +48,26 @@ public abstract class AdminAbstractController<T>{
         }
     }
 
-    public ResponseEntity<String> deleteEntity(int entityId){
+    public ResponseEntity<?> deleteEntity(int entityId){
+        try{
+            adminCrud.delete(entityId);
+            return new ResponseEntity<>(new MessageResponse("Entity deleted"), HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+        }
 
-            return adminCrud.delete(entityId) ? new ResponseEntity<>("Delete successful", HttpStatus.OK) :
-                    new ResponseEntity<>("Delete failed.", HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<?> updateAll(List<T> entities){
+        try {
+            var result = adminCrud.updateAll(entities);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    record MessageResponse(String message){}
 }
