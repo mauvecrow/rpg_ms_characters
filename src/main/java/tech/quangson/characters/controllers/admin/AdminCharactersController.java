@@ -44,4 +44,14 @@ public class AdminCharactersController extends AdminAbstractController<RpgCharac
     public ResponseEntity<?> deleteCharacter(@PathVariable int characterId){
         return deleteEntity(characterId);
     }
+
+    @GetMapping("/min")
+    public List<MinCharacter> getAllMinimum(){
+        return getAllEntities()
+                .stream()
+                .map( c -> new MinCharacter(c.getCharacterId(), c.getName(), c.getClazz()))
+                .toList();
+    }
+
+    record MinCharacter(int characterId, String name, String clazz){}
 }
