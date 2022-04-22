@@ -11,5 +11,5 @@ public interface AdminCrud<T> {
 
     List<T> getAll();
     T updateEntityId(T newEntity, T oldEntity);
-
+    List<T> updateAll(List<T> entities);
 }

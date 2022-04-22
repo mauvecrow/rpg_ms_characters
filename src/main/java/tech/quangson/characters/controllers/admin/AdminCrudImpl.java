@@ -56,4 +56,9 @@ public class AdminCrudImpl<T extends AbstractEntity> implements AdminCrud<T>{
         newEntity.pushPrimaryKey(oldEntity.pullPrimaryKey());
         return newEntity;
     }
+
+    @Override
+    public List<T> updateAll(List<T> entities) {
+        return (List<T>) dao.saveAll(entities);
+    }
 }
