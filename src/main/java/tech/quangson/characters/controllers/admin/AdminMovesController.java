@@ -39,4 +39,9 @@ public class AdminMovesController extends AdminAbstractController<RpgMoveEntity>
     public ResponseEntity<?> deleteMove(@PathVariable int moveId){
         return deleteEntity(moveId);
     }
+
+    @PutMapping()
+    public ResponseEntity<?> saveAll(@RequestBody List<RpgMoveEntity> moves){
+        return updateAll(moves);
+    }
 }
