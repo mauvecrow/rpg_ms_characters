@@ -6,6 +6,7 @@ import tech.quangson.characters.data.RpgCharacterMovesetEntity;
 import tech.quangson.characters.data.RpgMovesetDao;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin/movesets")
@@ -17,8 +18,14 @@ public class AdminMovesetController extends AdminAbstractController<RpgCharacter
 
 
     @GetMapping
-    public List<RpgCharacterMovesetEntity> getAllMovesets(){
-        return getAllEntities();
+    public List<RpgCharacterMovesetEntity> getAllMovesets(@RequestParam Optional<Integer> characterId){
+        if(characterId.isEmpty())
+            return getAllEntities();
+        else {
+            return getAllEntities().stream()
+                    .filter( ms -> ms.getCharacterId()==characterId.get())
+                    .toList();
+        }
     }
 
     @PutMapping
