@@ -50,8 +50,9 @@ public abstract class AdminAbstractController<T>{
 
     public ResponseEntity<?> deleteEntity(int entityId){
         try{
-            adminCrud.delete(entityId);
-            return new ResponseEntity<>(new MessageResponse("Entity deleted"), HttpStatus.OK);
+            var result = adminCrud.delete(entityId);
+            String message = result ? "Entity deleted" : "No entity was deleted";
+            return new ResponseEntity<>(new MessageResponse(message), HttpStatus.OK);
         }
         catch(Exception e){
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
